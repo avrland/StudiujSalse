@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/avrland/StudiujSalse_Android/master/studiujsalseWhite.png?raw=true"/>
+<img src="https://raw.githubusercontent.com/avrland/StudiujSalse_Android/master/studiujsalseWhite.png?height=200"/>
 # StudiujSalse_Android
 Cuban salsa figures and rueda commands list for Android
 * simply figures list with short description and links to YouTube videos (if there is any)
