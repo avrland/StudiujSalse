@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,17 +21,15 @@ import java.util.ArrayList;
  */
 public class wallet_list_create extends BaseAdapter {
     private Activity activity;
-    private static ArrayList title,notice;
+    private static ArrayList title, videoAvaible;
     private static LayoutInflater inflater = null;
 
     public wallet_list_create(Activity a, ArrayList b, ArrayList bod) {
         activity = a;
         title = b;
-        notice=bod;
-
+        videoAvaible=bod;
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     public int getCount() {
@@ -55,10 +54,11 @@ public class wallet_list_create extends BaseAdapter {
         wallet_name_list_textView.setText(wallet_name_item);
 
 
-        TextView wallet_balance_list_textView = vi.findViewById(R.id.description); // notice
-        String wallet_balance_item = notice.get(position).toString();
-        wallet_balance_list_textView.setText(wallet_balance_item);
-
+        ImageView videoAvaibleImageView = vi.findViewById(R.id.imageView4); // notice
+        String checkVideoFlag = videoAvaible.get(position).toString();
+        if(checkVideoFlag.equals("0")){
+            videoAvaibleImageView.setVisibility(View.INVISIBLE);
+        }
         return vi;
     }
 }

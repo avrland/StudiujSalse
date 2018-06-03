@@ -1,48 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="80dp"
+    android:layout_height="50dp"
     android:orientation="vertical"
-    android:padding="5dp" >
+    android:padding="5dp">
 
-    <LinearLayout
-        android:id="@+id/thumbnail"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="0dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="5dip"
-        android:visibility="visible" >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="269dp"
+            android:layout_height="23dp"
             android:paddingLeft="10dp"
             android:text="Title"
+            android:textAlignment="textStart"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginTop="3dp"
-            android:ellipsize="end"
-            android:maxEms="20"
-            android:maxLines="2"
-            android:paddingLeft="10dp"
-            android:singleLine="false"
-            android:text="Description"
-            android:textColor="#808080"
-            android:textSize="15dp"
-            android:textStyle="normal"
-            android:visibility="visible" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/video" />
+    </android.support.constraint.ConstraintLayout>
 
-
-    </LinearLayout>
 
 </RelativeLayout>

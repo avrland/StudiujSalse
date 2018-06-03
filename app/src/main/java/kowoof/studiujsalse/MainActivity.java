@@ -1,22 +1,29 @@
 package kowoof.studiujsalse;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends DrawerActivity {
 
     //We create here stuff for listView
     private ArrayList<String> listViewTitle = new ArrayList<>();
-    private ArrayList<String> listViewSubTitle = new ArrayList<>();
+    private ArrayList<String> videoAvaible = new ArrayList<>();
     private ListView list;
     private wallet_list_create adapter;
 
@@ -29,46 +36,76 @@ public class MainActivity extends DrawerActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Wyszukaj figurę", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+//                String fileName= "helloworld";
+//                String textToWrite = "Hello, World!";
+//                FileOutputStream fileOutputStream;
+//                try {
+//                    fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+//                    fileOutputStream.write(textToWrite.getBytes());
+//                    fileOutputStream.close();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
         });
         fillListView();
         goToFigureDescriptionHandler();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu, this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_figures_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.onlyRueda:
+                if(!item.isChecked()){
+                    item.setChecked(true);
+                    //pokażFiguryZRuedy();
+                }
+                else {
+                    item.setChecked(false);
+                    //pokażWszystkieFigury();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void fillListView(){
         list = findViewById(R.id.mainListView);
         listViewTitle.add("AL CENTRO");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("0");
         listViewTitle.add("ARRIBA");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("1");
+
         listViewTitle.add("ABAJO");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("1");
         listViewTitle.add("LA CHICA");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("1");
         listViewTitle.add("EL CHICO");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("0");
         listViewTitle.add("AL CENTRO");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("1");
         listViewTitle.add("ARRIBA");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("0");
         listViewTitle.add("ABAJO");
-        listViewSubTitle.add("Opis...");
-        listViewTitle.add("LA CHICA");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("1");
         listViewTitle.add("EL CHICO");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("0");
         listViewTitle.add("AL CENTRO");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("1");
         listViewTitle.add("ARRIBA");
-        listViewSubTitle.add("Opis...");
+        videoAvaible.add("0");
         listViewTitle.add("ABAJO");
-        listViewSubTitle.add("Opis...");
-        listViewTitle.add("LA CHICA");
-        listViewSubTitle.add("Opis...");
-        listViewTitle.add("EL CHICO");
-        listViewSubTitle.add("Opis...");
-        adapter = new wallet_list_create(this, listViewTitle, listViewSubTitle);
+        videoAvaible.add("0");
+
+        adapter = new wallet_list_create(this, listViewTitle, videoAvaible);
         list.setAdapter(adapter);
     }
 

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">#StudiujSalse</string>
-    <string name="action_settings">Nie podglądaj ;)</string>
+    <string name="action_settings">Tylko rueda</string>
     <string name="title_activity_main">#StudiujSalsę</string>
     <string name="title_activity_drawer">DrawerActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

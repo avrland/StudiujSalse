@@ -5,9 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 public class MusicPageActivity extends DrawerActivity {
 
@@ -40,5 +42,22 @@ public class MusicPageActivity extends DrawerActivity {
     }
 
 
+    public void salsaSpotify(View view) {
+        Toast.makeText(MusicPageActivity.this, "Salsa Spotify",
+                Toast.LENGTH_LONG).show();
+    }
+    public void reggaetonSpotify(View view) {
+        Toast.makeText(MusicPageActivity.this, "Reggaeton Spotify",
+                Toast.LENGTH_LONG).show();
+    }
 
+    public void salsaTidal(View view) {
+        Toast.makeText(MusicPageActivity.this, "Salsa Tidal",
+                Toast.LENGTH_LONG).show();
+    }
+
+    public void reggaetonTidal(View view) {
+        Toast.makeText(MusicPageActivity.this, "Reggaeton Tidal",
+                Toast.LENGTH_LONG).show();
+    }
 }
