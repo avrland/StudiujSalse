@@ -1,7 +1,11 @@
 package kowoof.studiujsalse;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -142,23 +146,15 @@ public class MainActivity extends DrawerActivity {
         String searchedFigure = figuresList[position];
         try {
             JSONArray new_array = new JSONArray(readJSON());
+
             for (int i = 0, count = new_array.length(); i < count; i++) {
                 try {
                     JSONObject jsonObject = new_array.getJSONObject(i);
                     if(jsonObject.getString("nazwa").equals(searchedFigure)){
-                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                        dialogBuilder.setTitle(jsonObject.getString("nazwa"));
-                        dialogBuilder.setMessage(jsonObject.getString("opis"));
-
-                        if(!jsonObject.getString("wideo").equals("0")) {
-                            dialogBuilder.setPositiveButton("Wideo", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                        }
-                        AlertDialog alert = dialogBuilder.create();
-                        alert.show();
+                           String currentName = jsonObject.getString("nazwa");
+                           String currentDescription = jsonObject.getString("opis");
+                           String currentVideo = jsonObject.getString("wideo");
+                           buildAlertDialog(currentName, currentDescription, currentVideo);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -169,7 +165,30 @@ public class MainActivity extends DrawerActivity {
             e.printStackTrace();
         }
     }
-
+    private void buildAlertDialog(String name, String description, final String video){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setTitle(name);
+        dialogBuilder.setMessage(description);
+        if(!video.equals("0")) {
+            dialogBuilder.setPositiveButton("Wideo", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    watchYoutubeVideo(getApplicationContext(), video);
+                }
+            });
+        }
+        AlertDialog alert = dialogBuilder.create();
+        alert.show();
+    }
+    public static void watchYoutubeVideo(Context context, String id){
+        Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.youtube.com/watch?v=" + id));
+        try {
+            context.startActivity(appIntent);
+        } catch (ActivityNotFoundException ex) {
+            context.startActivity(webIntent);
+        }
+    }
     private String readJSON(){ //odczyt bazy danych figur z pliku
         AssetManager assetManager = getAssets();
         InputStream input;
