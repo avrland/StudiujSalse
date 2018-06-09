@@ -1,0 +1,26 @@
+[
+  {
+    "nazwa": "El dos",
+    "opis": "b",
+    "wideo": "1",
+    "rueda": "1"
+  },
+  {
+    "nazwa": "La chica",
+    "opis": "b",
+    "wideo": "1",
+    "rueda": "1"
+  },
+  {
+    "nazwa": "El chico",
+    "opis": "b",
+    "wideo": "1",
+    "rueda": "0"
+  },
+  {
+    "nazwa": "Fly doble",
+    "opis": "b",
+    "wideo": "0",
+    "rueda": "1"
+  }
+]

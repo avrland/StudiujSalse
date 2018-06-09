@@ -3,6 +3,8 @@ package kowoof.studiujsalse;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -50,8 +52,6 @@ public class SettingsActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction()
                 .replace(R.id.settings_layout, new GeneralPreferenceFragment())
                 .commit();
-
-
     }
 
     @Override
@@ -82,6 +82,5 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
         }
-
     }
 }
