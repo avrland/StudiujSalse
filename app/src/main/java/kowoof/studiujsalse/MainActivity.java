@@ -1,12 +1,15 @@
 package kowoof.studiujsalse;
 
+import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -44,7 +47,7 @@ public class MainActivity extends DrawerActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clearListView();
+                downloadBase();
             }
         });
         fillListView_AllFigures();
@@ -155,6 +158,7 @@ public class MainActivity extends DrawerActivity {
                            String currentDescription = jsonObject.getString("opis");
                            String currentVideo = jsonObject.getString("wideo");
                            buildAlertDialog(currentName, currentDescription, currentVideo);
+                           i = count; //we don't need to scroll object after we find searched one
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -207,4 +211,25 @@ public class MainActivity extends DrawerActivity {
         }
         return text;
     }
+
+    private void downloadBase(){
+        String url = "https://raw.githubusercontent.com/avrland/StudiujSalse_Android/master/app/src/main/assets/figurebase.json";
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setDescription("Pobieram nową bazę figur.");
+        request.setTitle("Zaczekaj...");
+        // in order for this if to run, you must use the android 3.2 to compile your app
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        }
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "figurebase.json");
+
+        // get download service and enqueue file
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+    }
+
+
+
+
 }
