@@ -1,12 +1,17 @@
 package kowoof.studiujsalse;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonReader;
+import android.util.JsonToken;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,10 +19,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends DrawerActivity {
 
@@ -36,16 +54,7 @@ public class MainActivity extends DrawerActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String fileName= "helloworld";
-//                String textToWrite = "Hello, World!";
-//                FileOutputStream fileOutputStream;
-//                try {
-//                    fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-//                    fileOutputStream.write(textToWrite.getBytes());
-//                    fileOutputStream.close();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                    clearWalletsList();
             }
         });
         fillListView();
@@ -105,7 +114,15 @@ public class MainActivity extends DrawerActivity {
         listViewTitle.add("ABAJO");
         videoAvaible.add("0");
 
+
         adapter = new wallet_list_create(this, listViewTitle, videoAvaible);
+        list.setAdapter(adapter);
+    }
+    private void clearWalletsList(){
+        list = findViewById(R.id.mainListView);
+        adapter = new wallet_list_create(MainActivity.this, listViewTitle, videoAvaible);
+        listViewTitle.clear();
+        videoAvaible.clear();
         list.setAdapter(adapter);
     }
 
@@ -144,5 +161,6 @@ public class MainActivity extends DrawerActivity {
         AlertDialog dialog = dialogBuilder.create();
         dialog.show();
     }
+
 
 }
