@@ -210,6 +210,7 @@ public class MainActivity extends DrawerActivity {
             e.printStackTrace();
         }
         return text;
+
     }
 
     private void downloadBase(){
